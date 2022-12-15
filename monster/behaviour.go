@@ -6,6 +6,10 @@ import (
 	my "github.com/LittleB0xes/kokyu/custom"
 )
 
+// Use Interface for *only* this is a bit overkill
+// but it is in the perspective of extending the possible behavior
+
+
 type Behaviour interface {
 	Update() Behaviour
 	GetPosition() my.Vec2
