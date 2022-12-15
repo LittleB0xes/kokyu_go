@@ -2,7 +2,6 @@ package main
 
 import (
 	"embed"
-	"fmt"
 	_ "image/png"
 	"log"
 
@@ -126,26 +125,10 @@ func (g *Game) Draw(screen *ebiten.Image) {
 
 	}
 
-	g.Debug(screen)
 }
 
 func (g *Game) Layout(outsideWidth, outsideHeight int) (screenWidth, screenHeight int) {
 	return 1278, 720
-}
-
-func (g *Game) Debug(screen *ebiten.Image) {
-	ebitenutil.DebugPrint(screen, fmt.Sprintf("TPS: %0.2f", ebiten.ActualFPS()))
-	//g.hero.DebugCollisionBox(screen, g.camera.X, g.camera.Y, 3)
-
-	//for i := 0; i < len(g.monsters); i++ {
-	//	g.monsters[i].DebugCollisionBox(screen, g.camera.X, g.camera.Y, g.scale)
-	//}
-
-	//g.hero.DebugHitBox(screen, g.camera.X, g.camera.Y, 3)
-	if ebiten.IsKeyPressed(ebiten.KeyTab) {
-		g.Reset()
-	}
-
 }
 
 func main() {
