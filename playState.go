@@ -66,10 +66,18 @@ func (g *Game) UpdatePlayState() {
 
 	// Check victory
 
-	if g.hero.IsDead() {
-		g.state = End
-	} else if len(g.monsters) == 0 && g.max_monster == 0 {
-		g.state = Win
+	if len(g.monsters) == 0 && g.max_monster == 0 {
+		g.fadeType = Out
+		if g.fadeType == Out && g.fader == 255 {
+			g.fadeType = In
+			g.state = Win
+		}
+	} else if g.hero.IsDead() {
+		g.fadeType = Out
+		if g.fadeType == Out && g.fader == 255 {
+			g.fadeType = In
+			g.state = End
+		}
 	}
 
 }

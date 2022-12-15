@@ -2,6 +2,7 @@ package main
 
 import (
 	"embed"
+	"image/color"
 	_ "image/png"
 	"log"
 
@@ -40,7 +41,17 @@ type Game struct {
 	soundBox      *sound.SoundBox
 	maxHealth     int
 	state         GameState
+	fader         uint8
+	fadeType      Fading
 }
+
+type Fading int
+
+const (
+	In Fading = iota
+	Out
+	None
+)
 
 func NewGame() *Game {
 
@@ -82,6 +93,8 @@ func NewGame() *Game {
 		soundBox:      sound,
 		maxHealth:     health,
 		state:         Intro,
+		fader:         255,
+		fadeType:      In,
 	}
 }
 
@@ -122,8 +135,23 @@ func (g *Game) Draw(screen *ebiten.Image) {
 		g.RenderWinState(screen)
 	case End:
 		g.RenderEndState(screen)
-
 	}
+
+	// Fader
+	switch g.fadeType {
+	case In:
+		if g.fader > 0 {
+			g.fader -= 3
+		}
+
+	case Out:
+		if g.fader < 255 {
+			g.fader += 3
+
+		}
+	}
+	color := color.RGBA{R: 0, G: 0, B: 0, A: g.fader}
+	ebitenutil.DrawRect(screen, 0, 0, 1280, 720, color)
 
 }
 

@@ -29,9 +29,15 @@ func (g *Game) RenderWinState(screen *ebiten.Image) {
 }
 
 func (g *Game) UpdateWinState() {
-	if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
+	if g.fadeType == In && g.fader < 50 {
+		if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
+			g.fadeType = Out
+		}
+	}
+
+	if g.fadeType == Out && g.fader == 255 {
+		g.fadeType = In
 		g.state = Play
 		g.Reset()
 	}
-
 }
