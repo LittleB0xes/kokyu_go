@@ -70,23 +70,6 @@ func NewGame() *Game {
 	colliders[1] = my.Rect{X: -16, Y: 0, W: 16, H: 112}
 	colliders[2] = my.Rect{X: 426, Y: 0, W: 16, H: 112}
 
-	//sampleRate := 44100
-	//data, err := f.ReadFile("assets/sounds/heart_beat.ogg")
-	//if err != nil {
-	//	panic(err)
-	//}
-	//reader, err := vorbis.DecodeWithSampleRate(sampleRate, bytes.NewReader(data))
-	//if err != nil {
-	//	panic(err)
-	//}
-	////loop := audio.NewInfiniteLoop(reader, reader.Length())
-
-	//beatPlayer, err := audio.NewContext(sampleRate).NewPlayer(reader)
-
-	//if err != nil {
-	//	panic(err)
-	//}
-
 	return &Game{
 		level:         level,
 		hero:          hero,
