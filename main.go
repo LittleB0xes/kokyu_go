@@ -121,7 +121,7 @@ func (g *Game) Reset() {
 	// All monster stuff
 	g.monsters = make([]*monster.Ghost, 0)
 	g.monster_timer = 30
-	g.max_monster = 1
+	g.max_monster = 5
 
 }
 
