@@ -43,6 +43,7 @@ type Game struct {
 	state         GameState
 	fader         uint8
 	fadeType      Fading
+	timerOn       bool
 }
 
 type Fading int
@@ -95,6 +96,7 @@ func NewGame() *Game {
 		state:         Intro,
 		fader:         255,
 		fadeType:      In,
+		timerOn:       true,
 	}
 }
 
@@ -122,6 +124,7 @@ func (g *Game) Reset() {
 	g.monsters = make([]*monster.Ghost, 0)
 	g.monster_timer = 30
 	g.max_monster = 5
+	g.timerOn = true
 
 }
 

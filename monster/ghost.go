@@ -83,6 +83,7 @@ func (e *Ghost) Update(heroPosition my.Vec2) {
 			if e.health <= 0 {
 				e.state = Dead
 				e.hitable = false
+				e.hited = false
 			}
 		}
 	case Dead:
@@ -142,6 +143,9 @@ func (e *Ghost) IsHitable() bool {
 
 func (e *Ghost) IsActive() bool {
 	return e.active
+}
+func (e *Ghost) IsDead() bool {
+	return e.state == Dead
 }
 
 func (e *Ghost) GetPosition() my.Vec2 {

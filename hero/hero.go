@@ -93,7 +93,7 @@ func (e *Hero) SetSoundSystem(s *sound.SoundBox) {
 	e.sound = s
 }
 
-func (e *Hero) Update(colliders *[]my.Rect, monsters []*monster.Ghost) {
+func (e *Hero) Update(colliders *[]my.Rect, monsters []*monster.Ghost, timerOn bool) {
 
 	// Gravity
 	e.velocity.Y += 0.5
@@ -148,12 +148,15 @@ func (e *Hero) Update(colliders *[]my.Rect, monsters []*monster.Ghost) {
 	}
 
 	// Life
-	e.health -= 1
-	if e.attack != NoAttack {
+	if timerOn {
 		e.health -= 1
-	}
-	if e.health < 0 {
-		e.health = 0
+		if e.attack != NoAttack {
+			e.health -= 1
+		}
+		if e.health < 0 {
+			e.health = 0
+		}
+
 	}
 
 	e.StateManager()
@@ -239,4 +242,7 @@ func (e *Hero) Reset(x, y float64, health int) {
 
 func (e *Hero) IsDead() bool {
 	return e.state == Dead
+}
+func (e *Hero) IsDeadOrDying() bool {
+	return e.state == Dead || e.state == Dying
 }

@@ -48,25 +48,33 @@ func (g *Game) UpdatePlayState() {
 		g.monster_timer = 50 + rand.Intn(30)
 	}
 
-	g.hero.Update(&g.colliders, g.monsters)
+	g.hero.Update(&g.colliders, g.monsters, g.timerOn)
 
 	for i := 0; i < len(g.monsters); i++ {
 		g.monsters[i].Update(g.hero.GetPosition())
 	}
 
 	// Remove dead monsters
-	alive := make([]*monster.Ghost, 0)
+	// and count living monster to check winning condition
+	// Because there is a delay to remove dead monster from the list
+	// due to the death animation time
+	rest := make([]*monster.Ghost, 0)
+	alive := 0
 	for _, m := range g.monsters {
+		if !m.IsDead() {
+			alive += 1
+		}
 		if m.IsActive() {
-			alive = append(alive, m)
+			rest = append(rest, m)
 		}
 	}
 	// copy th new array
-	g.monsters = alive
+	g.monsters = rest
 
 	// Check victory
 
-	if len(g.monsters) == 0 && g.max_monster == 0 {
+	if (len(g.monsters) == 0 || alive == 0) && g.max_monster == 0 && !g.hero.IsDeadOrDying() {
+		g.timerOn = false
 		g.fadeType = Out
 		if g.fadeType == Out && g.fader == 255 {
 			g.fadeType = In
