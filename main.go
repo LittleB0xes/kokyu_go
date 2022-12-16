@@ -90,7 +90,7 @@ func NewGame() *Game {
 		monsters:      monsters,
 		ghost_text:    ghost_text,
 		monster_timer: 30,
-		max_monster:   5,
+		max_monster:   1,
 		soundBox:      sound,
 		maxHealth:     health,
 		state:         Intro,
@@ -123,7 +123,7 @@ func (g *Game) Reset() {
 	// All monster stuff
 	g.monsters = make([]*monster.Ghost, 0)
 	g.monster_timer = 30
-	g.max_monster = 5
+	g.max_monster = 1
 	g.timerOn = true
 
 }

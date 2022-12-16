@@ -87,6 +87,7 @@ func (e *Ghost) Update(heroPosition my.Vec2) {
 			}
 		}
 	case Dead:
+		e.hited = false
 		if e.sprite.IsAnimationEnded() {
 			e.active = false
 			e.hitable = false
