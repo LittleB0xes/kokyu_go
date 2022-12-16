@@ -74,6 +74,8 @@ func (g *Game) UpdatePlayState() {
 		}
 	} else if g.hero.IsDead() {
 		g.fadeType = Out
+		g.soundBox.SBStop(sound.Beat)
+
 		if g.fadeType == Out && g.fader == 255 {
 			g.fadeType = In
 			g.state = End

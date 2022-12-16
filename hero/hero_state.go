@@ -116,6 +116,8 @@ func (e *Hero) StateManager() {
 
 		}
 	case Dying:
+		e.velocity.X = 0
+		e.dir = 0
 		if e.sprite.GetCurrentFrame() == 0 {
 			e.sound.SBPlay(sound.Death)
 		} else if e.sprite.IsAnimationEnded() {
@@ -123,6 +125,8 @@ func (e *Hero) StateManager() {
 		}
 
 	case Dead:
+		e.velocity.X = 0
+		e.dir = 0
 
 	}
 

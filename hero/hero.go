@@ -230,6 +230,7 @@ func (e *Hero) Reset(x, y float64, health int) {
 	e.health = health
 	e.position = my.Vec2{X: x, Y: y}
 	e.state = Idle
+	e.attack = NoAttack
 
 	// Sprite Reset
 	e.sprite.SetAnimation(e.animations[e.state])

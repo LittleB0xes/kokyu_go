@@ -4,12 +4,14 @@ import (
 	"image"
 	"image/color"
 
+	"github.com/LittleB0xes/kokyu/soundBox"
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
 	"github.com/hajimehoshi/ebiten/v2/inpututil"
 )
 
 func (g *Game) RenderIntroState(screen *ebiten.Image) {
+	g.soundBox.SBPlay(soundBox.Ambiance)
 	g.level.RenderBackground(screen, g.camera.X, g.camera.Y, g.scale)
 
 	//g.level.RenderParticles(screen, g.camera.X, g.camera.Y, g.scale)
@@ -44,6 +46,9 @@ func (g *Game) UpdateIntroState() {
 	if g.fadeType == Out && g.fader == 255 {
 		g.fadeType = In
 		g.state = Play
+		g.soundBox.SBStop(soundBox.Ambiance)
+		g.soundBox.SBPlay(soundBox.Ambiance)
+		g.soundBox.SBPlay(soundBox.Beat)
 	}
 
 }
